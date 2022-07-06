@@ -9,6 +9,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class TimetableResponse {
 
+    private String day;
+
     private String period1st;
 
     private String period2nd;

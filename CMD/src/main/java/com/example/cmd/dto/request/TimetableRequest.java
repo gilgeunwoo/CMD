@@ -3,11 +3,11 @@ package com.example.cmd.dto.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-
 @Getter
 @NoArgsConstructor
 public class TimetableRequest {
+
+    private String day;
 
     private String period1st;
 

@@ -19,6 +19,7 @@ public class SignUpService {
 
     @Transactional
     public void signup(SignUpRequest signUpRequest, String secretKey) {
+
         User user = userRepository.findBySecretKey(secretKey)
                 .orElseThrow();
         user.update(signUpRequest.getUsername(),

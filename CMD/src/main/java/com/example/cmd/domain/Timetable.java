@@ -16,6 +16,9 @@ public class Timetable {
     private Long id;
 
     @Column
+    private String day;
+
+    @Column
     private String period1st;
 
     @Column
@@ -46,7 +49,8 @@ public class Timetable {
     private String period10th;
 
     @Builder
-    public Timetable(String period1st, String period2nd, String period3th, String period4th, String period5th, String period6th, String period7th, String period8th, String period9th, String period10th) {
+    public Timetable(String day, String period1st, String period2nd, String period3th, String period4th, String period5th, String period6th, String period7th, String period8th, String period9th, String period10th) {
+        this.day = day;
         this.period1st = period1st;
         this.period2nd = period2nd;
         this.period3th = period3th;
@@ -57,5 +61,20 @@ public class Timetable {
         this.period8th = period8th;
         this.period9th = period9th;
         this.period10th = period10th;
+    }
+
+    public Timetable update(String period1st, String period2nd, String period3th, String period4th, String period5th, String period6th, String period7th, String period8th, String period9th, String period10th) {
+        this.period1st = period1st;
+        this.period2nd = period2nd;
+        this.period3th = period3th;
+        this.period4th = period4th;
+        this.period5th = period5th;
+        this.period6th = period6th;
+        this.period7th = period7th;
+        this.period8th = period8th;
+        this.period9th = period9th;
+        this.period10th = period10th;
+
+        return this;
     }
 }

@@ -15,15 +15,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(length = 20, nullable = false, unique = true)
     private String username;
 
-    @Column
+    @Column(length = 4, nullable = false, unique = true)
     private String number;
 
-    @Column
+    @Column(length = 12, nullable = false, unique = true)
     private String userId;
-    @Column
+    @Column(length = 24, nullable = false)
     private String password;
     @Column
     private String secretKey;

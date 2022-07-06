@@ -1,4 +1,4 @@
-package com.example.cmd;
+package com.example.cmd.controller;
 
 
 import com.example.cmd.dto.request.SignUpRequest;
