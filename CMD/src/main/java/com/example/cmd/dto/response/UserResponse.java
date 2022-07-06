@@ -5,9 +5,13 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class AdminResponse {
+public class UserResponse {
 
-    private String secretKey;
+    private String username;
 
     private String number;
+
+    private String birthday;
+
+    private String field;
 }

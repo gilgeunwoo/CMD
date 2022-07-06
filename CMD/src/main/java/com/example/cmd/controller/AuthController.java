@@ -13,7 +13,7 @@ public class AuthController {
 
     private final SignUpService signUpService;
 
-    @PutMapping ("/signup/{secretKey}")
+    @PostMapping ("/signup/{secretKey}")
     public void signup(@RequestBody SignUpRequest signUpRequest, @PathVariable ("secretKey") String secretKey) {
         signUpService.signup(signUpRequest, secretKey);
     }

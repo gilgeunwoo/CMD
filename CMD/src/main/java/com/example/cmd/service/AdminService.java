@@ -6,6 +6,8 @@ import com.example.cmd.domain.User;
 import com.example.cmd.domain.UserRepository;
 import com.example.cmd.dto.request.AdminRequest;
 import com.example.cmd.dto.request.TimetableRequest;
+import com.example.cmd.dto.request.UserRequest;
+import com.example.cmd.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class AdminService {
     private final UserRepository userRepository;
     private final TimetableRepository timetableRepository;
 
-    @Transactional
+
     public String createSecretKey(AdminRequest adminRequest) {
         userRepository.save(User.builder()
                 .number(adminRequest.getNumber())
@@ -69,5 +71,14 @@ public class AdminService {
                 .orElseThrow(RuntimeException::new);
     }
 
+    @Transactional
+    public void updateUserInfo(UserRequest userRequest, String number) {
+        User user = userRepository.findByNumber(number)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        user.update(userRequest.getUsername(),
+                    userRequest.getNumber(),
+                    userRequest.getBirthday(),
+                    userRequest.getField());
 
+    }
 }

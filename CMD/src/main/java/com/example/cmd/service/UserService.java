@@ -1,7 +1,12 @@
 package com.example.cmd.service;
 
 import com.example.cmd.domain.TimetableRepository;
+import com.example.cmd.domain.User;
+import com.example.cmd.domain.UserRepository;
+import com.example.cmd.dto.request.UserRequest;
 import com.example.cmd.dto.response.TimetableResponse;
+import com.example.cmd.dto.response.UserResponse;
+import com.example.cmd.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +17,8 @@ import javax.transaction.Transactional;
 public class UserService {
 
     private final TimetableRepository timetableRepository;
+
+    private final UserRepository userRepository;
 
     @Transactional
     public TimetableResponse getTimetable(String day) {
@@ -34,4 +41,21 @@ public class UserService {
                 })
                 .orElseThrow(RuntimeException::new);
     }
+
+    @Transactional
+    public UserResponse getUserInfo(String number) {
+        return userRepository.findByNumber(number)
+                .map(user -> {
+                    UserResponse response = UserResponse.builder()
+                            .username(user.getUsername())
+                            .number(user.getNumber())
+                            .birthday(user.getBirthday())
+                            .field(user.getField())
+                            .build();
+                    return response;
+                })
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+    }
+
+
 }
