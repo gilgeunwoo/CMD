@@ -1,15 +1,22 @@
 package com.example.cmd.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.jdbc.core.SqlReturnType;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+@AllArgsConstructor
+@Data
 @NoArgsConstructor
 @Getter
+@Builder
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,16 +43,17 @@ public class User {
     @Column
     private String birthday;
 
-    @Builder
-    public User(String birthday, String field, String username, String number, String userId, String password, String secretKey, Long seatNumber) {
-        this.birthday = birthday;
-        this.field = field;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+
+    public User updateEx(String username, String number, String userId, String password) {
         this.username = username;
         this.number = number;
         this.userId = userId;
         this.password = password;
-        this.secretKey = secretKey;
-        this.seatNumber = seatNumber;
+        return this;
     }
 
     public User update(String username, String number, String birthday, String field) {
@@ -58,4 +66,28 @@ public class User {
     }
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

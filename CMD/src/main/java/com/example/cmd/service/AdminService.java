@@ -1,9 +1,6 @@
 package com.example.cmd.service;
 
-import com.example.cmd.domain.Timetable;
-import com.example.cmd.domain.TimetableRepository;
-import com.example.cmd.domain.User;
-import com.example.cmd.domain.UserRepository;
+import com.example.cmd.domain.*;
 import com.example.cmd.dto.request.AdminRequest;
 import com.example.cmd.dto.request.TimetableRequest;
 import com.example.cmd.dto.request.UserRequest;
@@ -12,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,6 +24,7 @@ public class AdminService {
         userRepository.save(User.builder()
                 .number(adminRequest.getNumber())
                 .secretKey(adminRequest.getSecretKey())
+                .role(Role.ROLE_USER)
                 .build());
         return "success!";
     }
