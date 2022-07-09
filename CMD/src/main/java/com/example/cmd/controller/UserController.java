@@ -4,10 +4,12 @@ import com.example.cmd.dto.response.TimetableResponse;
 import com.example.cmd.dto.response.UserResponse;
 import com.example.cmd.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@PreAuthorize("hasAnyRole('USER')")
 @RestController
 public class UserController {
 
