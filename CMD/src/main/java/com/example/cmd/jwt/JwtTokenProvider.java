@@ -23,7 +23,7 @@ import java.util.Date;
 public class JwtTokenProvider  {
 
 
-    private String secretKey = "ertyuikmjnbvfdrtyhnbvcdfrtyhnbvcfghnbvfgth";
+    private String secretKey = "ertyuikmjnbvfdrtyhnbvcdfrtyhnbvcfghnbvfgthtfcvbnjhgtfdcvbhtrewszxcdewqazxcfrdfghuygfvbnjiuygbhjuytfcvbgfrdeszsaqzxcvfrdcvghuygbhjiuytghjuygfvbhgfrewsxcfrewqasxcvbghuytgfvbhjkioiujhbnh";
 
 
     private long tokenValidTime = 30 * 60 * 1000L;

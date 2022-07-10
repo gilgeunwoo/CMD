@@ -9,16 +9,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/user")
-@PreAuthorize("hasAnyRole('USER')")
+@PreAuthorize("hasRole('USER')")
 @RestController
 public class UserController {
 
     private final UserService userService;
 
+
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/timetable/{day}")
     public TimetableResponse getTimetable(@PathVariable String day) {
         return userService.getTimetable(day);
     }
+
 
     @GetMapping("/info/{number}")
     public UserResponse getUserInfo(@PathVariable String number) {

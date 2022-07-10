@@ -9,5 +9,6 @@ spring:
     hibernate:
       ddl-auto: update
   jwt:
+    header: Authorization
     algorithm: "HS256"
     secretKey: ${jwt.secretKey}
