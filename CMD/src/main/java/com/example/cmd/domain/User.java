@@ -30,8 +30,8 @@ public class User implements UserDetails {
 
     @Column(length = 12, unique = true)
     private String userId;
-    @Lob
-    @Column
+
+    @Column(columnDefinition = "TEXT")
     private String password;
     @Column
     private String secretKey;
