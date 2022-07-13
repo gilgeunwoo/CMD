@@ -49,6 +49,7 @@ public class User implements UserDetails {
     private Role role;
 
 
+
     public User updateEx(String username, String number, String userId, String password) {
         this.username = username;
         this.number = number;
@@ -64,6 +65,17 @@ public class User implements UserDetails {
         this.field = field;
         return this;
 
+    }
+
+    public User updateAll(String username, String number, String userId, String password, String birthday, String field) {
+        this.username = username;
+        this.number = number;
+        this.userId = userId;
+        this.password = password;
+        this.birthday = birthday;
+        this.field = field;
+
+        return this;
     }
 
 

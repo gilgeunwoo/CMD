@@ -7,6 +7,7 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,9 +24,11 @@ import java.util.Date;
 public class JwtTokenProvider  {
 
 
-    private String secretKey = "ertyuikmjnbvfdrtyhnbvcdfrtyhnbvcfghnbvfgthtfcvbnjhgtfdcvbhtrewszxcdewqazxcfrdfghuygfvbnjiuygbhjuytfcvbgfrdeszsaqzxcvfrdcvghuygbhjiuytghjuygfvbhgfrewsxcfrewqasxcvbghuytgfvbhjkioiujhbnh";
+    @Value("${secretKey}")
+    private String secretKey;
 
 
+    //@Value("${accessTime}")
     private long tokenValidTime = 30 * 60 * 1000L;
 
     private final UserDetailsService userDetailsService;
@@ -72,5 +75,9 @@ public class JwtTokenProvider  {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public String getSecretKey() {
+        return secretKey;
     }
 }

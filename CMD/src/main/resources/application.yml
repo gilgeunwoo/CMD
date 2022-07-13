@@ -11,4 +11,6 @@ spring:
   jwt:
     header: Authorization
     algorithm: "HS256"
-    secretKey: ${jwt.secretKey}
+    secretKey: ${secretKey}
+    exp:
+      access: ${accessTime}

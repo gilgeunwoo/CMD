@@ -3,11 +3,15 @@ package com.example.cmd.service;
 import com.example.cmd.domain.TimetableRepository;
 import com.example.cmd.domain.User;
 import com.example.cmd.domain.UserRepository;
-import com.example.cmd.dto.request.UserRequest;
+import com.example.cmd.dto.request.UserInfoRequest;
 import com.example.cmd.dto.response.TimetableResponse;
 import com.example.cmd.dto.response.UserResponse;
 import com.example.cmd.exception.UserNotFoundException;
+import com.example.cmd.jwt.JwtTokenProvider;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,6 +23,13 @@ public class UserService {
     private final TimetableRepository timetableRepository;
 
     private final UserRepository userRepository;
+
+    private final UserDetailsService userDetailsService;
+
+    private final JwtTokenProvider jwtTokenProvider;
+
+
+
 
     @Transactional
     public TimetableResponse getTimetable(String day) {
@@ -57,5 +68,23 @@ public class UserService {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
+    @Transactional
+    public void updatePersonalInfo(UserInfoRequest userInfoRequest, String accessToken) {
 
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtTokenProvider.getSecretKey())
+                .parseClaimsJws(accessToken)
+                .getBody();
+
+        User user = userRepository.findByUserId(claims.getSubject())
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        user.updateAll(
+                userInfoRequest.getUsername(),
+                userInfoRequest.getNumber(),
+                userInfoRequest.getUserId(),
+                userInfoRequest.getPassword(),
+                userInfoRequest.getBirthday(),
+                userInfoRequest.getField());
+    }
 }
