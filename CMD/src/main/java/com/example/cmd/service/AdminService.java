@@ -2,6 +2,7 @@ package com.example.cmd.service;
 
 import com.example.cmd.domain.*;
 import com.example.cmd.dto.request.AdminRequest;
+import com.example.cmd.dto.request.NoticeBoardRequest;
 import com.example.cmd.dto.request.TimetableRequest;
 import com.example.cmd.dto.request.UserRequest;
 import com.example.cmd.exception.UserNotFoundException;
@@ -17,7 +18,7 @@ public class AdminService {
 
     private final UserRepository userRepository;
     private final TimetableRepository timetableRepository;
-
+    private final NoticeBoardRepository noticeBoardRepository;
 
     public String createSecretKey(AdminRequest adminRequest) {
         userRepository.save(User.builder()
@@ -78,5 +79,16 @@ public class AdminService {
                     userRequest.getBirthday(),
                     userRequest.getField());
 
+    }
+
+    @Transactional
+    public String postNotice(NoticeBoardRequest noticeBoardRequest) {
+        noticeBoardRepository.save(
+                NoticeBoard.builder()
+                        .title(noticeBoardRequest.getTitle())
+                        .contents(noticeBoardRequest.getContents())
+                        .build());
+
+        return "success!";
     }
 }

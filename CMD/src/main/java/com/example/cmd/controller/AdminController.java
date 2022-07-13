@@ -2,6 +2,7 @@ package com.example.cmd.controller;
 
 import com.example.cmd.domain.Timetable;
 import com.example.cmd.dto.request.AdminRequest;
+import com.example.cmd.dto.request.NoticeBoardRequest;
 import com.example.cmd.dto.request.TimetableRequest;
 import com.example.cmd.dto.request.UserRequest;
 import com.example.cmd.dto.response.TimetableResponse;
@@ -55,5 +56,11 @@ public class AdminController {
     @GetMapping("/timetable/{day}")
     public TimetableResponse getTimetable(@PathVariable String day) {
         return userService.getTimetable(day);
+    }
+
+    @PostMapping("/notice")
+    public String postNotice(@RequestBody NoticeBoardRequest noticeBoardRequest) {
+        adminService.postNotice(noticeBoardRequest);
+        return "success!";
     }
 }

@@ -1,9 +1,8 @@
 package com.example.cmd.service;
 
-import com.example.cmd.domain.TimetableRepository;
-import com.example.cmd.domain.User;
-import com.example.cmd.domain.UserRepository;
+import com.example.cmd.domain.*;
 import com.example.cmd.dto.request.UserInfoRequest;
+import com.example.cmd.dto.response.NoticeBoardResponse;
 import com.example.cmd.dto.response.TimetableResponse;
 import com.example.cmd.dto.response.UserResponse;
 import com.example.cmd.exception.UserNotFoundException;
@@ -15,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -25,6 +25,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final UserDetailsService userDetailsService;
+
+    private final NoticeBoardRepository noticeBoardRepository;
 
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -86,5 +88,9 @@ public class UserService {
                 userInfoRequest.getPassword(),
                 userInfoRequest.getBirthday(),
                 userInfoRequest.getField());
+    }
+
+    public List<NoticeBoard> getNoticeBoard() {
+        return noticeBoardRepository.findAll();
     }
 }
