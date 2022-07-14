@@ -7,6 +7,8 @@ import lombok.Getter;
 @Builder
 public class AdminResponse {
 
+    private String username;
+
     private String secretKey;
 
     private String number;

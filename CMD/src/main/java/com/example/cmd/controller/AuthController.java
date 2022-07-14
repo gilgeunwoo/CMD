@@ -1,6 +1,7 @@
 package com.example.cmd.controller;
 
 
+import com.example.cmd.dto.request.AdminSignInRequest;
 import com.example.cmd.dto.request.LoginRequest;
 import com.example.cmd.dto.request.SignUpRequest;
 import com.example.cmd.dto.response.TokenResponse;
@@ -22,6 +23,12 @@ public class AuthController {
     @PostMapping("/signin")
     public TokenResponse signin(@RequestBody LoginRequest loginRequest) {
         return authService.login(loginRequest);
+    }
+
+
+    @PostMapping("/adminSignin")
+    public TokenResponse adminSignin(@RequestBody AdminSignInRequest adminSignInRequest) {
+        return authService.adminSignIn(adminSignInRequest);
     }
 
 }

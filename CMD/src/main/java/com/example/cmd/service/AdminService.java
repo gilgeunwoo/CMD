@@ -22,11 +22,12 @@ public class AdminService {
 
     public String createSecretKey(AdminRequest adminRequest) {
         userRepository.save(User.builder()
+                .username(adminRequest.getUsername())
                 .number(adminRequest.getNumber())
                 .secretKey(adminRequest.getSecretKey())
                 .role(Role.ROLE_USER)
                 .build());
-        return "success!";
+        return "success!!";
     }
 
     @Transactional

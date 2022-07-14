@@ -4,13 +4,13 @@ package com.example.cmd.dto.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Getter
 @NoArgsConstructor
-public class SignUpRequest {
+@Getter
+public class MakeAdminRequest {
 
-    private String userId;
+    private String adminName;
+
+    private String groupNumber;
 
     private String password;
 }

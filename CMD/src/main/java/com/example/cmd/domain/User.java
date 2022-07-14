@@ -50,9 +50,7 @@ public class User implements UserDetails {
 
 
 
-    public User updateEx(String username, String number, String userId, String password) {
-        this.username = username;
-        this.number = number;
+    public User updateEx(String userId, String password) {
         this.userId = userId;
         this.password = password;
         return this;

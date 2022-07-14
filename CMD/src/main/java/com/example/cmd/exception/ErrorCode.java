@@ -11,8 +11,9 @@ public enum ErrorCode {
     USER_EXISTS(409, "User Exists"),
     USER_NOT_FOUND(404, "User Not Found"),
     SECRET_KEY_NOT_FOUND(404, "Secret Key Not Found"),
+    INVALID_PASSWORD(401, "Invalid Password"),
+    CLASS_NOT_FOUND(404, "Class Not Found");
 
-    INVALID_PASSWORD(401, "Invalid Password");
 
     private final int status;
     private final String message;

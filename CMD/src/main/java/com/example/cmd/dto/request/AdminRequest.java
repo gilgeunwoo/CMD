@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AdminRequest {
 
+    private String username;
+
     private String secretKey;
 
     private String number;
