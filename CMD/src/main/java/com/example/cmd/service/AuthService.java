@@ -33,7 +33,7 @@ public class AuthService {
         if (userRepository.findByUserId(signUpRequest.getUserId()).isPresent()) {
             throw AlreadyExistUserException.EXCEPTION;
         }
-        
+
         User user = userRepository.findBySecretKey(secretKey)
                 .orElseThrow();
         user.updateEx(signUpRequest.getUserId(),

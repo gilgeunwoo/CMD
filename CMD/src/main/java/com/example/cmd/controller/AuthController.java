@@ -26,7 +26,7 @@ public class AuthController {
     }
 
 
-    @PostMapping("/adminSignin")
+    @PostMapping("/signina")
     public TokenResponse adminSignin(@RequestBody AdminSignInRequest adminSignInRequest) {
         return authService.adminSignIn(adminSignInRequest);
     }
