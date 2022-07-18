@@ -16,4 +16,4 @@ spring:
       access: ${accessTime}
 server:
   tomcat:
-    connection-timeout: -1
+    connection-timeout: 180000000000
