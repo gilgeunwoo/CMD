@@ -22,8 +22,6 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    private final TeacherRepository adminRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
 
@@ -54,12 +52,12 @@ public class AuthService {
 
     public TokenResponse adminSignIn(AdminSignInRequest adminSignInRequest) {
 
-        Teacher admin = adminRepository.findByGroupNumber(adminSignInRequest.getGroupNumber())
+        User admin = userRepository.findByUserId(adminSignInRequest.getGroupNumber())
                 .orElseThrow(() -> ClassNotFoundException.EXCEPTION);
         if (!passwordEncoder.matches(adminSignInRequest.getPassword(), admin.getPassword()))
             throw InvalidPasswordException.EXCEPTION;
 
-        return jwtTokenProvider.createToken(admin.getGroupNumber(), Role.ROLE_ADMIN);
+        return jwtTokenProvider.createToken(admin.getUserId(), Role.ROLE_ADMIN);
     }
 
 
