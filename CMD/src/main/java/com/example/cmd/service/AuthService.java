@@ -4,6 +4,7 @@ import com.example.cmd.domain.*;
 import com.example.cmd.dto.request.AdminSignInRequest;
 import com.example.cmd.dto.request.LoginRequest;
 import com.example.cmd.dto.request.SignUpRequest;
+import com.example.cmd.dto.response.SignUpResponse;
 import com.example.cmd.dto.response.TokenResponse;
 import com.example.cmd.exception.AlreadyExistUserException;
 import com.example.cmd.exception.ClassNotFoundException;
@@ -26,7 +27,7 @@ public class AuthService {
 
 
     @Transactional
-    public void signup(SignUpRequest signUpRequest, String secretKey) {
+    public SignUpResponse signup(SignUpRequest signUpRequest, String secretKey) {
 
         if (userRepository.findByUserId(signUpRequest.getUserId()).isPresent()) {
             throw AlreadyExistUserException.EXCEPTION;
@@ -36,6 +37,8 @@ public class AuthService {
                 .orElseThrow();
         user.updateEx(signUpRequest.getUserId(),
                 passwordEncoder.encode(signUpRequest.getPassword()));
+
+        return new SignUpResponse("success", "success!");
     }
 
     public TokenResponse login(LoginRequest loginRequest) {
