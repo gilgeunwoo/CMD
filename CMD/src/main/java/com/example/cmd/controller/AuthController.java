@@ -16,8 +16,9 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping ("/signup/{secretKey}")
-    public void signup(@RequestBody SignUpRequest signUpRequest, @PathVariable ("secretKey") String secretKey) {
+    public String signup(@RequestBody SignUpRequest signUpRequest, @PathVariable ("secretKey") String secretKey) {
         authService.signup(signUpRequest, secretKey);
+        return "success!";
     }
 
     @PostMapping("/signin")
