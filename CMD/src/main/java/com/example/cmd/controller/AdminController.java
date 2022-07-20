@@ -1,5 +1,6 @@
 package com.example.cmd.controller;
 
+import com.example.cmd.domain.NoticeBoard;
 import com.example.cmd.domain.Timetable;
 import com.example.cmd.dto.request.AdminRequest;
 import com.example.cmd.dto.request.NoticeBoardRequest;
@@ -74,5 +75,10 @@ public class AdminController {
         return "success!";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/noticeBoard")
+    public List<NoticeBoard> getNotice() {
+        return userService.getNoticeBoard();
+    }
 
 }
