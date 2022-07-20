@@ -11,6 +11,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,6 +29,7 @@ public class UserService {
 
     private final NoticeBoardRepository noticeBoardRepository;
 
+    private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
 
@@ -84,7 +86,7 @@ public class UserService {
         user.updateAll(
                 userInfoRequest.getUsername(),
                 userInfoRequest.getNumber(),
-                userInfoRequest.getUserId(),
+                passwordEncoder.encode(userInfoRequest.getUserId()),
                 userInfoRequest.getPassword(),
                 userInfoRequest.getBirthday(),
                 userInfoRequest.getField());
