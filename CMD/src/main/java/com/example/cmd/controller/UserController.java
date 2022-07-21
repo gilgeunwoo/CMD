@@ -1,12 +1,14 @@
 package com.example.cmd.controller;
 
 import com.example.cmd.domain.NoticeBoard;
+import com.example.cmd.domain.User;
 import com.example.cmd.dto.request.UserInfoRequest;
 import com.example.cmd.dto.response.TimetableResponse;
 import com.example.cmd.dto.response.UserResponse;
 import com.example.cmd.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,5 +45,11 @@ public class UserController {
     @GetMapping("/noticeBoard")
     public List<NoticeBoard> getNotice() {
         return userService.getNoticeBoard();
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/Info")
+    public List<User> getUserAll() {
+        return userService.getUser();
     }
 }

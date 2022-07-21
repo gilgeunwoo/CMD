@@ -95,4 +95,8 @@ public class UserService {
     public List<NoticeBoard> getNoticeBoard() {
         return noticeBoardRepository.findAll();
     }
+
+    public List<User> getUser() {
+        return userRepository.findAll();
+    }
 }
